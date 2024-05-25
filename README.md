@@ -13,32 +13,26 @@ Asegúrate de tener instalados los siguientes programas en tu sistema:
 
 Sigue los pasos a continuación para configurar y ejecutar el proyecto:
 
-1. Inicializa un nuevo proyecto Django dentro del contenedor `web`:
-    ```sh
-    docker compose run web django-admin startproject backend .
-    ```
-
-2. Levanta los contenedores Docker:
-    ```sh
-    docker compose up
-    ```
-
-3. Crea las migraciones de la base de datos:
+1. Crea las migraciones de la base de datos:
     ```sh
     docker compose run web python manage.py makemigrations
     ```
 
-4. Ejecuta las migraciones de la base de datos:
+2. Ejecuta las migraciones de la base de datos:
     ```sh
     docker compose run web python manage.py migrate
     ```
+3. Levanta los contenedores Docker:
+    ```sh
+    docker compose up
+    ```
 
-5. (Opcional) Crea un superusuario:
+4. (Opcional) Crea un superusuario:
     ```sh
     docker compose run web python manage.py createsuperuser
     ```
 
-6. Accede a la aplicación en tu navegador web en `http://localhost:8000`.
+5. Accede a la aplicación en tu navegador web en `http://localhost:8000`.
 
 ## Comandos útiles
 
