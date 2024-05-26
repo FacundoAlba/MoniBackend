@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
@@ -21,10 +22,31 @@ class CustomUserCreationForm(UserCreationForm):
     )
 
     password2 = forms.CharField(
-        label='Repetir Contraseña',
+        label='Repetir contraseña',
         widget=forms.PasswordInput,
         help_text='Repita la contraseña'
     )
+
+class CustomUserUptadeForm(UserCreationForm):
+    username = forms.CharField(
+        label='Nuevo nombre de usuario',
+        max_length=20,
+        help_text='20 caracteres como máximo. Únicamente letras, dígitos y @/./+/-/_'
+    )
+
+    password1 = forms.CharField(
+        label=' Nueva contraseña',
+        min_length=8,
+        widget=forms.PasswordInput,
+        help_text='Su contraseña debe contener al menos 8 caracteres.'
+    )
+
+    password2 = forms.CharField(
+        label='Repetir nueva contraseña',
+        widget=forms.PasswordInput,
+        help_text='Repita la contraseña'
+    )
+
 def home(request):
     return render(request, 'home.html')
 
@@ -69,22 +91,18 @@ def signin(request):
         
 @login_required
 def user_detail(request):
+    user = request.user
     if request.method == 'GET':
-        user = request.user
-        form = CustomUserCreationForm(instance=user)
-        return render(request, 'user_detail.html', {
-            'user': user, 'form': form
-        })
+        form = CustomUserUptadeForm()
     else:
-        user = request.user
-        form = CustomUserCreationForm(request.POST, instance=user)
+        form = CustomUserUptadeForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
-            return redirect('home') 
-        else:
-            return render(request, 'user_detail.html', {
-                'user': user, 'form': form
-            })
+            messages.success(request, '¡Los datos se han actualizado correctamente!')
+            return redirect('home')
+    
+    return render(request, 'user_detail.html', {'form': form})
+        
 @login_required
 def loans(request):
     loans = LoanRequest.objects.all()
