@@ -15,7 +15,7 @@
     <ul>
         {% if user.is_authenticated %}
           <li><a href="/">Home</a></li>
-          <li><a href="/user">Ajustes</a></li>
+          <li><a href="/user">Ajustes de usuario</a></li>
           <li><a href="/loans">Préstamos</a></li>
         {% endif %}
     </ul>
@@ -35,6 +35,7 @@
 
   <div class="content">
     <div class="container">
+      {% include 'messages.html' %}
       {% block content %}
       {% endblock %}
     </div>

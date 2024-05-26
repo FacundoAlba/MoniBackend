@@ -236,3 +236,69 @@ form button:hover {
     font-size: 14px;
   
 }
+
+.no-loans-message {
+    display: inline-block;
+    padding: 10px;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.info-card {
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.info-card h2 {
+    margin-top: 0;
+    font-size: 1.5em;
+    color: #333333;
+}
+
+.info-card ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.info-card ul li {
+    margin: 10px 0;
+    font-size: 1.1em;
+    color: #555555;
+}
+
+.messages {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 1em 0;
+}
+
+.message {
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    color: #fff;
+    display: inline-block;
+}
+
+.message.success {
+    background-color: #4CAF50; /* Verde para mensajes de éxito */
+}
+
+.message.error {
+    background-color: #F44336; /* Rojo para mensajes de error */
+}
+
+.message.warning {
+    background-color: #FF9800; /* Naranja para mensajes de advertencia */
+}
+
+.message.info {
+    background-color: #2196F3; /* Azul para mensajes informativos */
+}
