@@ -3,40 +3,44 @@
 {% block content %}
     <h2>Listado de Préstamos</h2>
 
-    <table class="loan-table">
-        <thead>
-            <tr>
-                <th>DNI</th>
-                <th>Nombre Completo</th>
-                <th>Género</th>
-                <th>Email</th>
-                <th>Monto</th>
-                <th>Fecha de Solicitud</th>
-                <th>Estado del Préstamo</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for loan in loans %}
-            <tr>
-                <td>{{ loan.dni }}</td>
-                <td>{{ loan.full_name }}</td>
-                <td>{{ loan.gender }}</td>
-                <td>{{ loan.email }}</td>
-                <td>${{ loan.amount }}</td>
-                <td>{{ loan.created_at }}</td>
-                <td>
-                    {% if loan.loan_status == "approve" %}
-                        <span class="status approve">Aprobado</span>
-                    {% elif loan.loan_status == "rejected" %}
-                        <span class="status rejected">Rechazado</span>
-                    {% else %}
-                        {{ loan.loan_status }}
-                    {% endif %}
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    {% if loans %}
+        <table class="loan-table">
+            <thead>
+                <tr>
+                    <th>DNI</th>
+                    <th>Nombre Completo</th>
+                    <th>Género</th>
+                    <th>Email</th>
+                    <th>Monto</th>
+                    <th>Fecha de Solicitud</th>
+                    <th>Estado del Préstamo</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for loan in loans %}
+                <tr>
+                    <td>{{ loan.dni }}</td>
+                    <td>{{ loan.full_name }}</td>
+                    <td>{{ loan.gender }}</td>
+                    <td>{{ loan.email }}</td>
+                    <td>${{ loan.amount }}</td>
+                    <td>{{ loan.created_at }}</td>
+                    <td>
+                        {% if loan.loan_status == "approve" %}
+                            <span class="status approve">Aprobado</span>
+                        {% elif loan.loan_status == "rejected" %}
+                            <span class="status rejected">Rechazado</span>
+                        {% else %}
+                            {{ loan.loan_status }}
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <span class="no-loans-message">Por el momento no se solicitaron préstamos.</span>
+    {% endif %}
 
     {% if error %}
         <p class="error-message">{{ error }}</p>
